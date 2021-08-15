@@ -1,11 +1,12 @@
 import Footer from './Footer/Footer';
 import React from 'react';
-import ReactDOM from "react-dom";
 
-const FooterExport = ():JSX.Element => {
-  return <Footer></Footer>
-}
+const FooterExport = (): JSX.Element => {
+  return (
+    <div className='testFooter'>
+      <Footer></Footer>
+    </div>
+  );
+};
 
 export default FooterExport;
-
-ReactDOM.render(<FooterExport></FooterExport>, document.getElementById('footer'));
