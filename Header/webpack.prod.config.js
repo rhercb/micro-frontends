@@ -2,29 +2,22 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { ModuleFederationPlugin } = require('webpack').container;
+const TerserPlugin = require('terser-webpack-plugin');
 
 const DIST_PATH = path.resolve(__dirname, './dist');
 
 module.exports = {
   entry: {
-    home: './components/App.tsx',
+    footer: './components/Export.tsx',
   },
   output: {
     filename: '[name].js?[contenthash]',
     path: DIST_PATH,
-    publicPath: 'http://localhost:9001/',
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', 'jsx'], // Nepieciešams lai webpack nebļauj par kļūdām ka nevar saprast faila paplašinājumu build laikā
   },
-  mode: 'development',
-  devServer: {
-    contentBase: DIST_PATH,
-    index: '/home.html',
-    port: 9001,
-    writeToDisk: true, // Nodrošina to ka tiek izveidoti faili zem dist foldera
-  },
+  mode: 'production',
   module: {
     rules: [
       {
@@ -39,20 +32,14 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new TerserPlugin(), // Minificē JS failu, webpack plugins
+    new CleanWebpackPlugin(), // Iztīra Dist folderi
     new MiniCssExtractPlugin({
       filename: '[name].css?[contenthash]',
-    }),
+    }), // Minificē CSS un izveido jaunu failu tam
     new HtmlWebpackPlugin({
-      filename: 'home.html',
-      template: './home.html',
-    }),
-    new ModuleFederationPlugin({
-      name: 'HomeApp',
-      remotes: {
-        FooterApp: 'FooterApp@http://localhost:9000/footerRemoteEntry.js',
-        HeaderApp: 'HeaderApp@http://localhost:9002/headerRemoteEntry.js',
-      },
+      filename: 'footer.html',
+      template: './footer.html',
     }),
   ],
 };

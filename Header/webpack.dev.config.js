@@ -8,12 +8,12 @@ const DIST_PATH = path.resolve(__dirname, './dist');
 
 module.exports = {
   entry: {
-    home: './components/App.tsx',
+    header: './components/App.tsx',
   },
   output: {
     filename: '[name].js?[contenthash]',
     path: DIST_PATH,
-    publicPath: 'http://localhost:9001/',
+    publicPath: 'http://localhost:9002/',
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', 'jsx'], // Nepieciešams lai webpack nebļauj par kļūdām ka nevar saprast faila paplašinājumu build laikā
@@ -21,8 +21,8 @@ module.exports = {
   mode: 'development',
   devServer: {
     contentBase: DIST_PATH,
-    index: '/home.html',
-    port: 9001,
+    index: '/header.html',
+    port: 9002,
     writeToDisk: true, // Nodrošina to ka tiek izveidoti faili zem dist foldera
   },
   module: {
@@ -44,14 +44,14 @@ module.exports = {
       filename: '[name].css?[contenthash]',
     }),
     new HtmlWebpackPlugin({
-      filename: 'home.html',
-      template: './home.html',
+      filename: 'header.html',
+      template: './header.html',
     }),
     new ModuleFederationPlugin({
-      name: 'HomeApp',
-      remotes: {
-        FooterApp: 'FooterApp@http://localhost:9000/footerRemoteEntry.js',
-        HeaderApp: 'HeaderApp@http://localhost:9002/headerRemoteEntry.js',
+      name: 'HeaderApp', // App name
+      filename: 'headerRemoteEntry.js',
+      exposes: {
+        './Header': './components/Export.tsx',
       },
     }),
   ],

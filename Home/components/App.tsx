@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import HomeExport from './Export';
 import ReactDOM from 'react-dom';
 //@ts-ignore
-const Footer = React.lazy(() => import('FooterApp/Footer'));
+// const Header = lazy(() => import('HeaderApp/Header'));
+// //@ts-ignore
+// const Footer = lazy(() => import('FooterApp/Footer'));
 
 const App = (): JSX.Element => {
   return (
     <>
+      <Suspense fallback='Header'>{/* <Header /> */}</Suspense>
       <HomeExport></HomeExport>
-      <React.Suspense fallback='Footer'>
-        <Footer />
-      </React.Suspense>
+      <Suspense fallback='Footer'>{/* <Footer /> */}</Suspense>
     </>
   );
 };
