@@ -2,7 +2,7 @@ import './navbar.scss';
 import NavigationItem from '../NavigationItem/NavigationItem';
 import React from 'react';
 
-const NavBar = (): JSX.Element => {
+const NavBar = () => {
   return (
     <ul>
       <NavigationItem exact link={'/'}>

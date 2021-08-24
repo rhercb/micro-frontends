@@ -1,7 +1,7 @@
 import Footer from './Footer/Footer';
 import React from 'react';
 
-const FooterExport = (): JSX.Element => {
+const FooterExport = () => {
   return (
     <div className='testFooter'>
       <Footer></Footer>

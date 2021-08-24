@@ -3,17 +3,19 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { ModuleFederationPlugin } = require('webpack').container;
+const TerserPlugin = require('terser-webpack-plugin');
+
 
 const DIST_PATH = path.resolve(__dirname, './dist');
 
 module.exports = {
   entry: {
-    footer: './components/App.tsx',
+    footer: './components/App.js',
   },
   output: {
-    filename: '[name].js?[contenthash]',
+    filename: '[name].[contenthash].js',
     path: DIST_PATH,
-    publicPath: 'http://localhost:9000/',
+    publicPath: 'auto',
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', 'jsx'], // Nepieciešams lai webpack nebļauj par kļūdām ka nevar saprast faila paplašinājumu build laikā
@@ -33,12 +35,25 @@ module.exports = {
       },
       {
         test: /\.(js|jsx|ts|tsx)$/,
-        exclude: /node_modules/,
+        exclude: path.resolve(__dirname, "node_modules"),
         loader: 'babel-loader',
+        options: {
+          "presets": [
+            "@babel/preset-env",
+            "@babel/preset-react",
+            "@babel/preset-typescript"
+          ],
+          "plugins": [
+            "@babel/proposal-class-properties",
+            "@babel/proposal-object-rest-spread",
+          ]
+        }
       },
     ],
   },
   plugins: [
+    // new TerserPlugin(), // Minificē JS failu, webpack plugins
+
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css?[contenthash]',
@@ -51,7 +66,8 @@ module.exports = {
       name: 'FooterApp', // App name
       filename: 'footerRemoteEntry.js',
       exposes: {
-        './Footer': './components/Export.tsx',
+        './Footer': './components/Export.js',
+        './FooterTest': './components/Footer/FooterTest.js'
       },
     }),
   ],

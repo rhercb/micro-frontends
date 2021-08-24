@@ -10,7 +10,7 @@ const DIST_PATH = path.resolve(__dirname, './dist');
 
 module.exports = {
   entry: {
-    header: './components/App.js',
+    home: './components/App.js',
   },
   output: {
     filename: '[name].[contenthash].js',
@@ -23,8 +23,8 @@ module.exports = {
   mode: 'development',
   devServer: {
     contentBase: DIST_PATH,
-    index: '/header.html',
-    port: 9002,
+    index: '/home.html',
+    port: 9003,
     writeToDisk: true, // Nodrošina to ka tiek izveidoti faili zem dist foldera
   },
   module: {
@@ -52,28 +52,22 @@ module.exports = {
     ],
   },
   plugins: [
-    // new TerserPlugin(), // Minificē JS failu, webpack plugins
+   // new TerserPlugin(), // Minificē JS failu, webpack plugins
 
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css?[contenthash]',
     }),
     new HtmlWebpackPlugin({
-      filename: 'header.html',
-      template: './header.html',
+      filename: 'home.html',
+      template: './home.html',
     }),
     new ModuleFederationPlugin({
-      name: 'HeaderApp', // App name
-      filename: 'headerRemoteEntry.js',
+      name: 'HomeTextApp',
+      filename: 'homeTextRemoteEntry.js',
       exposes: {
-        './Header': './components/Export.js',
+        './HomeText': './components/Export.js',
       },
-      shared: {
-        "react-dom": { 
-          singleton: true,
-          eager: true
-        }
-      }
     }),
   ],
 };

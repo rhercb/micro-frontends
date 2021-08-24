@@ -2,7 +2,7 @@ import React from 'react';
 import FooterExport from './Export';
 import ReactDOM from 'react-dom';
 
-const Footer = (): JSX.Element => {
+const Footer = () => {
   return <FooterExport></FooterExport>;
 };
 

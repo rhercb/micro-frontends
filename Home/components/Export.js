@@ -1,7 +1,7 @@
 import HomePage from './HomePage/HomePage';
 import React from 'react';
 
-const HomeExport = (): JSX.Element => {
+const HomeExport = () => {
   return <HomePage></HomePage>;
 };
 

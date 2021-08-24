@@ -2,13 +2,7 @@ import './navigation-item.scss';
 import React, { ReactChild } from 'react';
 import { NavLink } from 'react-router-dom';
 
-interface NavItem {
-  exact: boolean;
-  link: string;
-  children: ReactChild;
-}
-
-const NavigationItem = (props: NavItem): JSX.Element => {
+const NavigationItem = (props) => {
   return (
     <li className='header__navigation--item'>
       <NavLink
