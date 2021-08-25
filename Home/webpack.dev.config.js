@@ -65,13 +65,10 @@ module.exports = {
     new ModuleFederationPlugin({
       name: 'HomeApp',
       remotes: {
-        FooterApp: 'FooterApp@http://localhost:9000/footerRemoteEntry.js',
+        FooterApp: 'FooterApp@http://localhost:9004/footerRemoteEntry.js',
         HeaderApp: 'HeaderApp@http://localhost:9002/headerRemoteEntry.js',
         HomeTextApp: 'HomeTextApp@http://localhost:9003/homeTextRemoteEntry.js',
       },
-      shared: [
-        "react-router-dom"
-      ]
     }),
   ],
 };

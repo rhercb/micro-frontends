@@ -68,9 +68,6 @@ module.exports = {
       exposes: {
         './HomeText': './components/Export.js',
       },
-      shared: [
-        "react-router-dom"
-      ]
     }),
   ],
 };
