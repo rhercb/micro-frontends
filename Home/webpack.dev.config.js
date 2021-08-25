@@ -69,6 +69,9 @@ module.exports = {
         HeaderApp: 'HeaderApp@http://localhost:9002/headerRemoteEntry.js',
         HomeTextApp: 'HomeTextApp@http://localhost:9003/homeTextRemoteEntry.js',
       },
+      shared: [
+        "react-router-dom"
+      ]
     }),
   ],
 };

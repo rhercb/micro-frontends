@@ -69,10 +69,7 @@ module.exports = {
         './Header': './components/Export.js',
       },
       shared: {
-        "react-dom": { 
-          singleton: true,
-          eager: true
-        }
+        "react-router-dom": {singleton: true, eager: true}
       }
     }),
   ],
