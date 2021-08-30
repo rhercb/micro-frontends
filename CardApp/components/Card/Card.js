@@ -1,5 +1,6 @@
 import './card.scss'
 import React, { useState, useEffect } from 'react';
+import CardInput from './CardInput/CardInput';
 
 const Card = () => {
 
@@ -10,11 +11,11 @@ const Card = () => {
     }
 
     useEffect(() => {
-        if (flip.flipped) {
-            document.getElementById('creditCard').classList.replace('front', 'back')
-        } else {
-            document.getElementById('creditCard').classList.replace('back', 'front')
-        }
+        // if (flip.flipped) {
+        //     document.getElementById('creditCard').classList.replace('front', 'back')
+        // } else {
+        //     document.getElementById('creditCard').classList.replace('back', 'front')
+        // }
     }, [flip.flipped])
 
     // Event to enter card number
@@ -28,7 +29,7 @@ const Card = () => {
         <>
             <div className="card front" id="creditCard" onClick={flipCards}>
                 <div className="card__front">
-                    <p>Cards number</p>
+                    <CardInput pattern="[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}" inputMode="numeric"/>
                     <p>Cards expiration date</p>
                     <p>Cards holder</p>
                 </div>
